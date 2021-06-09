@@ -9,6 +9,8 @@ import java.sql.ClientInfoStatus;
 public class Main {
 
     private static String SEPARATOR = "#################################";
+    private static String FILE = "my_format.txt";
+
 
     public static void main(String[] args) {
 
@@ -51,7 +53,7 @@ public class Main {
         System.out.println(class1.myFormat());
         class1.getAll_myFormat();
 
-        class1.getAll_myFormat("file");
+        class1.getAll_myFormat(FILE);
 
     }
 

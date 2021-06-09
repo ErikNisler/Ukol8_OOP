@@ -81,7 +81,7 @@ public class Classroom implements IFormat1, IFormat2, IGetAll, IMyFormat {
     }
 
     public void getAll_myFormat(String file){
-        try (PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter("file")))) {
+        try (PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(file)))) {
             writer.println(myFormat());
             for (int i = 0; i < listOfStudents.size(); i++) {
                 Student s = listOfStudents.get(i);

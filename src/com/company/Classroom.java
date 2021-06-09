@@ -1,5 +1,10 @@
 package com.company;
 
+import com.company.interfaces.IFormat1;
+import com.company.interfaces.IFormat2;
+import com.company.interfaces.IGetAll;
+import com.company.interfaces.IMyFormat;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;

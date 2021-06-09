@@ -1,4 +1,7 @@
 package com.company;
+
+import com.company.interfaces.IFormat1;
+
 public class Teacher implements IFormat1 {
     private String firstName;
     private String lastName;

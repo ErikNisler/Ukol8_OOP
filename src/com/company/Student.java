@@ -1,9 +1,7 @@
 package com.company;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import com.company.interfaces.IFormat1;
+import com.company.interfaces.IMyFormat;
 
 /**Dědičnost*/
 public class Student extends Teacher implements IFormat1, IMyFormat {

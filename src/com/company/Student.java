@@ -44,8 +44,8 @@ public class Student extends Teacher implements IPrintOut {
     }
 
     @Override
-    public void myPrintOut(){
-        System.out.println(sequence +" - "+getFirstName()+" "+getLastName());
+    public String myPrintOut(){
+        return sequence +" - "+getFirstName()+" "+getLastName();
     }
 
 }

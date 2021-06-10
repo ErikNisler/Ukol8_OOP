@@ -8,6 +8,6 @@ public interface IPrintOut {
 
     void printOut2();
 
-    void myPrintOut();
+    String myPrintOut();
 
 }

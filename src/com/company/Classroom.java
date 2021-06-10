@@ -19,6 +19,7 @@ public class Classroom implements IPrintOut {
     private int yOfStudy;
     private Teacher teacher;
     private ArrayList<Student> listOfStudents = new ArrayList<>();
+    private ArrayList<String> studenti = new ArrayList<>();
 
     public Classroom(String name, int yOfStudy, Teacher teacher) {
         this.name = name;
@@ -92,21 +93,19 @@ public class Classroom implements IPrintOut {
     }
 
     @Override
-    public void myPrintOut(){
-        getTeacher().myPrintOut();
-        System.out.println("Třída: "+getName());
+    public String myPrintOut(){
         for (int i = 0; i < listOfStudents.size(); i++) {
             Student s = listOfStudents.get(i);
-            s.myPrintOut();
+            studenti.add(s.myPrintOut());
         }
+        return getTeacher().myPrintOut()+"\n"+
+                "Třída: "+getName()+"\n"+
+                studenti;
     }
 
-    public void write(String file){
-        try (PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(file)))) {
-            for (int i = 0; i < listOfStudents.size(); i++) {
-                Student s = listOfStudents.get(i);
-                writer.println(s.myPrintOut());
-            }
+    public void write(){
+        try (PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter("file")))) {
+                writer.println(myPrintOut());
         } catch (
                 IOException e) {
             System.err.println("Chyba při zápisu souboru");
@@ -125,7 +124,8 @@ public class Classroom implements IPrintOut {
         System.out.println();
         class1.printOut2();
         System.out.println();
-        class1.myPrintOut();
+        System.out.println(class1.myPrintOut());
+        class1.write();
 
     }
 }

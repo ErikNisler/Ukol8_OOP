@@ -38,7 +38,7 @@ public class Teacher implements IPrintOut {
     }
 
     @Override
-    public void myPrintOut(){
-        System.out.println("Třídní učitel "+getLastName());
+    public String myPrintOut(){
+        return "Třídní učitel "+getLastName();
     }
 }

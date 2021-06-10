@@ -1,9 +1,7 @@
 package com.company;
 
-import com.company.interfaces.IFormat1;
-import com.company.interfaces.IFormat2;
-import com.company.interfaces.IGetAll;
-import com.company.interfaces.IMyFormat;
+import com.company.interfaces.IPrintOut;
+import org.w3c.dom.ls.LSOutput;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -11,7 +9,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-public class Classroom implements IFormat1, IFormat2, IGetAll, IMyFormat {
+public class Classroom implements IPrintOut {
+
+
+    private static String SEPARATOR = "#################################";
+    private static String FILE = "my_format.txt";
 
     private String name;
     private int yOfStudy;
@@ -56,45 +58,9 @@ public class Classroom implements IFormat1, IFormat2, IGetAll, IMyFormat {
         listOfStudents.add(student);
     }
 
-    @Override
-    public void getAll1(){
-        for (int i = 0; i < listOfStudents.size(); i++) {
-            Student s = listOfStudents.get(i);
-            System.out.println(s.format1());
-        }
-    }
 
-    @Override
-    public void getAll2(){
-        for (int i = 0; i < listOfStudents.size(); i++) {
-            Student s = listOfStudents.get(i);
-            System.out.println(s.format2());
-        }
-    }
-
-    @Override
-    public void getAll_myFormat(){
-        for (int i = 0; i < listOfStudents.size(); i++) {
-            Student s = listOfStudents.get(i);
-            System.out.println(s.myFormat());
-        }
-    }
-
-    public void getAll_myFormat(String file){
-        try (PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(file)))) {
-            writer.println(myFormat());
-            for (int i = 0; i < listOfStudents.size(); i++) {
-                Student s = listOfStudents.get(i);
-            writer.println(s.myFormat());
-        }
-        } catch (IOException e) {
-            System.err.println("Chyba při zápisu souboru");
-        }
-    }
-
-
-    public String sizeOfList(){
-        return "Počet studentů: "+listOfStudents.size();
+    public int sizeOfList(){
+        return listOfStudents.size();
     }
 
     public void setListOfStudents(ArrayList<Student> listOfStudents) {
@@ -102,19 +68,64 @@ public class Classroom implements IFormat1, IFormat2, IGetAll, IMyFormat {
     }
 
     @Override
-    public String format1(){
-        return "Třída: "+getName()+" (ročník: "+getyOfStudy()+")";
+    public void printOut1(){
+        System.out.println(SEPARATOR);
+        System.out.println("Třída: "+getName()+" (ročník: "+getyOfStudy()+")");
+        getTeacher().printOut1();
+        System.out.println("Počet studentů: "+listOfStudents.size());
+        System.out.println(SEPARATOR);
+        for (int i = 0; i < listOfStudents.size(); i++) {
+            Student s = listOfStudents.get(i);
+            s.printOut1();
+        }
     }
 
     @Override
-    public String format2(){
-        return getName()+", "+getTeacher().getFirstName()+" "+getTeacher().getLastName();
+    public void printOut2(){
+
+        System.out.print(getName()+" ");
+        getTeacher().printOut2();
+        for (int i = 0; i < listOfStudents.size(); i++) {
+            Student s = listOfStudents.get(i);
+            s.printOut2();
+        }
     }
 
     @Override
-    public String myFormat(){
-        return "Počet studentů ve třídě "+getName()+": "+sizeOfList()+", třídní učitel: "+getTeacher().getFirstName()+" "+getTeacher().getLastName();
-
+    public void myPrintOut(){
+        getTeacher().myPrintOut();
+        System.out.println("Třída: "+getName());
+        for (int i = 0; i < listOfStudents.size(); i++) {
+            Student s = listOfStudents.get(i);
+            s.myPrintOut();
+        }
     }
 
+    public void write(String file){
+        try (PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(file)))) {
+            for (int i = 0; i < listOfStudents.size(); i++) {
+                Student s = listOfStudents.get(i);
+                writer.println(s.myPrintOut());
+            }
+        } catch (
+                IOException e) {
+            System.err.println("Chyba při zápisu souboru");
+        }
+    }
+
+    public static void main(String[] args){
+        Teacher teacher1 = new Teacher("Jan","Novák");
+        Classroom class1 = new Classroom("4.C",4,teacher1);
+
+        class1.addStudent(new Student("Aleš","Zahálka",2001,"S01"));
+        class1.addStudent(new Student("Milan","Petrklíč",2000,"S02"));
+        class1.addStudent(new Student("Petr","Pavel",2000,"S03"));
+
+        class1.printOut1();
+        System.out.println();
+        class1.printOut2();
+        System.out.println();
+        class1.myPrintOut();
+
+    }
 }

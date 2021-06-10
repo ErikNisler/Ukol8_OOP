@@ -1,10 +1,9 @@
 package com.company;
 
-import com.company.interfaces.IFormat1;
-import com.company.interfaces.IMyFormat;
+import com.company.interfaces.IPrintOut;
 
 /**Dědičnost*/
-public class Student extends Teacher implements IFormat1, IMyFormat {
+public class Student extends Teacher implements IPrintOut {
     private static int id = 0;
     private int sequence;
 
@@ -35,17 +34,18 @@ public class Student extends Teacher implements IFormat1, IMyFormat {
     }
 
     @Override
-    public String format1(){
-        return "# "+sequence+" # "+getStudentId()+" - "+getFirstName()+" "+getLastName() + " ("+getYear()+")";
-    }
-
-    public String format2(){
-        return getStudentId()+", "+getFirstName()+" "+getLastName();
+    public void printOut1(){
+        System.out.println("# "+sequence+" # "+getStudentId()+" "+getFirstName()+" "+getLastName()+" ("+getYear()+")");
     }
 
     @Override
-    public String myFormat(){
-        return getStudentId()+" - "+getLastName()+", "+getFirstName();
+    public void printOut2(){
+        System.out.println(getStudentId()+", "+getFirstName()+" "+getLastName());
+    }
+
+    @Override
+    public void myPrintOut(){
+        System.out.println(sequence +" - "+getFirstName()+" "+getLastName());
     }
 
 }

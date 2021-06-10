@@ -1,8 +1,8 @@
 package com.company;
 
-import com.company.interfaces.IFormat1;
+import com.company.interfaces.IPrintOut;
 
-public class Teacher implements IFormat1 {
+public class Teacher implements IPrintOut {
     private String firstName;
     private String lastName;
 
@@ -28,8 +28,17 @@ public class Teacher implements IFormat1 {
     }
 
     @Override
-    public String format1(){
-        return "Třídní učitel: "+getLastName()+", "+getFirstName();
+    public void printOut1(){
+        System.out.println("Třídní učitel: "+getLastName()+", "+getFirstName());
     }
 
+    @Override
+    public void printOut2(){
+        System.out.println(getFirstName()+" "+getLastName());
+    }
+
+    @Override
+    public void myPrintOut(){
+        System.out.println("Třídní učitel "+getLastName());
+    }
 }
